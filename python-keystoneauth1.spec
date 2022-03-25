@@ -11,7 +11,7 @@
 Summary:	Authentication Library for OpenStack Identity
 Name:		python-keystoneauth1
 Version:	3.1.0
-Release:	5
+Release:	6
 License:	Apache
 Group:		Libraries/Python
 Source0:	https://pypi.python.org/packages/60/84/563732a068310ee9a8c3626a037efea22b3a926431d91f1ec991db89a70e/keystoneauth1-%{version}.tar.gz
