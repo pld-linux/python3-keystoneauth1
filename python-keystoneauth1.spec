@@ -13,7 +13,7 @@ Summary(pl.UTF-8):	Biblioteka uwierzytleniająca dla tożsamości OpenStack
 Name:		python-keystoneauth1
 # keep 3.x here for python2 support
 Version:	3.18.0
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/k/keystoneauth1/keystoneauth1-%{version}.tar.gz
@@ -157,10 +157,14 @@ rm -rf $RPM_BUILD_ROOT
 %py_install
 
 %py_postclean
+
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/keystoneauth1/tests
 %endif
 
 %if %{with python3}
 %py3_install
+
+%{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/keystoneauth1/tests
 %endif
 
 %clean
