@@ -8,7 +8,7 @@
 
 Summary:	Authentication Library for OpenStack Identity
 Summary(pl.UTF-8):	Biblioteka uwierzytleniająca dla tożsamości OpenStack
-Name:		python-keystoneauth1
+Name:		python3-keystoneauth1
 Version:	5.11.0
 Release:	1
 License:	Apache v2.0
