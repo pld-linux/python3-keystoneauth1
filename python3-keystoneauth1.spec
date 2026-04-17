@@ -24,9 +24,10 @@ BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-PyYAML >= 3.12
 BuildRequires:	python3-betamax >= 0.7.0
+BuildRequires:	python3-coverage >= 4.0
 BuildRequires:	python3-fixtures >= 3.0.0
-BuildRequires:	python3-iso8601 >= 0.1.11
-BuildRequires:	python3-lxml >= 3.4.1
+BuildRequires:	python3-iso8601 >= 2.0.0
+BuildRequires:	python3-lxml >= 4.2.0
 BuildRequires:	python3-oauthlib >= 0.6.2
 BuildRequires:	python3-os-service-types >= 1.2.0
 BuildRequires:	python3-oslo.config >= 5.2.0
@@ -35,17 +36,17 @@ BuildRequires:	python3-oslotest >= 3.2.0
 BuildRequires:	python3-requests >= 2.14.2
 BuildRequires:	python3-requests-kerberos >= 0.8.0
 BuildRequires:	python3-requests-mock >= 1.2.0
-BuildRequires:	python3-six >= 1.10.0
 BuildRequires:	python3-stestr >= 1.0.0
 BuildRequires:	python3-stevedore >= 1.20.0
 BuildRequires:	python3-testresources >= 2.0.0
 BuildRequires:	python3-testtools >= 2.2.0
+BuildRequires:	python3-typing_extensions >= 4.12
 %endif
 %if %{with doc}
-BuildRequires:	python3-openstackdocstheme >= 1.18.1
-BuildRequires:	python3-reno >= 2.5.0
+BuildRequires:	python3-openstackdocstheme >= 2.2.1
+BuildRequires:	python3-reno >= 3.1.0
 BuildRequires:	python3-sphinxcontrib-apidoc >= 0.2.0
-BuildRequires:	sphinx-pdg-3 >= 1.7.0
+BuildRequires:	sphinx-pdg-3 >= 2.0.0
 %endif
 Requires:	python3-modules >= 1:3.9
 BuildArch:	noarch
@@ -83,7 +84,11 @@ Dokumentacja API modułu Pythona keystoneauth1.
 %setup -q -n keystoneauth1-%{version}
 
 %build
-%py3_build %{?with_tests:test}
+%py3_build
+
+%if %{with tests}
+stestr-3 run
+%endif
 
 %if %{with doc}
 %{__make} -C doc html \
