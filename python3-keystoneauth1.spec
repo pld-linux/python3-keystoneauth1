@@ -1,10 +1,7 @@
 #
-# TODO:
-#	- enable 'extras' - kerberos and betamax (both require new dependecies)
-
 # Conditional build:
 %bcond_without	doc	# Sphinx documentation
-%bcond_with	tests	# unit tests (require tons of dependencies)
+%bcond_without	tests	# unit tests
 
 Summary:	Authentication Library for OpenStack Identity
 Summary(pl.UTF-8):	Biblioteka uwierzytleniająca dla tożsamości OpenStack
@@ -13,6 +10,7 @@ Version:	5.11.0
 Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
+#Source0Download: https://pypi.org/simple/keystoneauth1/
 Source0:	https://files.pythonhosted.org/packages/source/k/keystoneauth1/keystoneauth1-%{version}.tar.gz
 # Source0-md5:	90649d8dc686f23d4764f6ac6ea657a2
 URL:		https://docs.openstack.org/keystoneauth/latest/
@@ -26,6 +24,7 @@ BuildRequires:	python3-PyYAML >= 3.12
 BuildRequires:	python3-betamax >= 0.7.0
 BuildRequires:	python3-coverage >= 4.0
 BuildRequires:	python3-fixtures >= 3.0.0
+BuildRequires:	python3-hacking >= 6.1.0
 BuildRequires:	python3-iso8601 >= 2.0.0
 BuildRequires:	python3-lxml >= 4.2.0
 BuildRequires:	python3-oauthlib >= 0.6.2
@@ -87,7 +86,10 @@ Dokumentacja API modułu Pythona keystoneauth1.
 %py3_build
 
 %if %{with tests}
-stestr-3 run
+# betamax test fails with:
+# urllib3.exceptions.IncompleteRead: IncompleteRead(780 bytes read, 1904 more expected)
+stestr-3 run \
+	-E test_keystoneauth_betamax_fixture
 %endif
 
 %if %{with doc}
